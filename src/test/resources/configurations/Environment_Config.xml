@@ -1,0 +1,18 @@
+<Environment_Config>
+    <Environment>QA1</Environment>
+    <Browser>IE</Browser>
+    <RetryCount>3</RetryCount>
+    <QA1>
+        <URL>www.amazon.com</URL>
+    </QA1>
+    <PERF>
+        <URL></URL>
+    </PERF>
+    <CTE>
+        <URL></URL>
+    </CTE>
+    <PROD>
+        <URL></URL>
+    </PROD>
+
+</Environment_Config>
