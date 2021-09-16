@@ -3,7 +3,7 @@ pipeline{
 
    triggers
    {
-        cron('*/15 * * * 1-5')
+        cron('00 12 * * 1-5')
     }
    stages{
       stage('SCM checkout')
@@ -49,12 +49,55 @@ pipeline{
      steps
      {
 
-       archiveArtifacts 'target/*.jar'
+        bat "del report.zip"
+        zip zipFile: 'report.zip', archive:false, dir:'target/*.jar'
+
+       // archiveArtifacts 'target/*.jar'
 
      }
 
    }
  
   }
+
+}
+
+post
+{
+   failure
+   {
+
+      emailext (
+      attachmentsPattern:'report.zip',
+      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      )
+
+   }
+   success
+   {
+      emailext (
+      attachmentsPattern:'report.zip',
+      subject: "Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      )
+ 
+   }
+
+   unstable
+   {
+      emailext (
+      attachmentsPattern:'report.zip',
+      subject: "Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      )
+ 
+   }
 
 }
