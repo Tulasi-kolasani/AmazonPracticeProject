@@ -1,0 +1,55 @@
+pipeline{
+   agent any
+   stages{
+      stage('SCM checkout')
+      {
+         steps
+         {
+
+           checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tulasi-kolasani/AmazonPracticeProject.git']]])
+         }
+     }
+    stage('CleanUp')
+    {
+      steps
+      {
+        bat 'mvn clean'
+      } 
+    
+    }
+
+   stage('Build')
+   {
+      steps
+      {
+       bat 'mvn -B compile'
+
+      } 
+   }
+
+   stage('Test')
+   {
+     steps{    
+
+         bat 'mvn install'
+
+         cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+
+     } 
+    
+    }
+   stage('Archive')
+   {
+
+     steps
+     {
+
+       archiveArtifacts 'target/*.jar'
+
+     }
+
+   }
+ 
+  }
+
+}
