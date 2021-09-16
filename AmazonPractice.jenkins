@@ -6,7 +6,7 @@ pipeline{
          steps
          {
 
-           checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tulasi-kolasani/AmazonPracticeProject.git']]])
+           checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '4745bb11-6027-4050-a8ee-c6f68b27ea04', url: 'https://github.com/Tulasi-kolasani/AmazonPracticeProject.git']]])
          }
      }
     stage('CleanUp')
