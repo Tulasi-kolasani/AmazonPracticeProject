@@ -52,7 +52,7 @@ pipeline{
        // bat "del report.zip"
        //  zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'/target'
 
-       // archiveArtifacts 'target/report.zip'
+        archiveArtifacts 'target/report.zip'
 
      }
 
