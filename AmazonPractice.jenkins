@@ -66,37 +66,21 @@ post
    failure
     {
 
-      emailext (
-      attachmentsPattern:'report.zip',
-      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      to: 'dilip.kolasani@gmail.com'
-      )
-
+       emailext attachLog: true, body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+       Check console output at $BUILD_URL to view the results.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'dilip.kolasani@gmail.com'
    }
   success
    {
-      emailext (
-      attachmentsPattern:'report.zip',
-      subject: "Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      to:'dilip.kolasani@gmail.com'
-      )
- 
+       emailext attachLog: true, body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+       Check console output at $BUILD_URL to view the results.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'dilip.kolasani@gmail.com'
    }
 
    unstable
    {
-      emailext (
-      attachmentsPattern:'report.zip',
-      subject: "Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      to:'dilip.kolasani@gmail.com'
-      )
- 
+       emailext attachLog: true, body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+       Check console output at $BUILD_URL to view the results.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'dilip.kolasani@gmail.com'
    }
 
 }
