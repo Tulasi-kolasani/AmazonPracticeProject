@@ -50,9 +50,9 @@ pipeline{
      {
 
         bat "del report.zip"
-        zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'/target'
+       //  zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'/target'
 
-       // archiveArtifacts 'target/*.jar'
+       // archiveArtifacts 'target/report.zip'
 
      }
 
