@@ -63,7 +63,7 @@ pipeline{
 post
 {
 
-   if("${buildStatus}==FAILURE)
+   failure
     {
 
       emailext (
@@ -75,7 +75,7 @@ post
       )
 
    }
-  if("${buildStatus}==SUCCESS)
+  success
    {
       emailext (
       attachmentsPattern:'report.zip',
@@ -87,7 +87,7 @@ post
  
    }
 
-    if("${buildStatus}==UNSTABLE)
+   unstable
    {
       emailext (
       attachmentsPattern:'report.zip',
