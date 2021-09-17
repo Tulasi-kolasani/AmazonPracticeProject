@@ -43,20 +43,20 @@ pipeline{
      } 
     
     }
-   stage('Archive')
-   {
+//   stage('Archive')
+//   {
 
-     steps
-     {
+//     steps
+//     {
 
        // bat "del report.zip"
        //  zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'/target'
 
-        archiveArtifacts 'target/report.zip'
+//        archiveArtifacts 'target/report.zip'
 
-     }
+//     }
 
-   }
+//   }
  
   }
 
@@ -71,7 +71,7 @@ post
       subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
       body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      to: 'dilip.kolasani@gmail.com'
       )
 
    }
@@ -82,7 +82,7 @@ post
       subject: "Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
       body: """<p>Successful: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      to:'dilip.kolasani@gmail.com'
       )
  
    }
@@ -94,7 +94,7 @@ post
       subject: "Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
       body: """<p>Unstable: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-      recipientProviders: [[$class: 'dilip.kolasani@gmail.com']]
+      to:'dilip.kolasani@gmail.com'
       )
  
    }
