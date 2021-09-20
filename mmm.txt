@@ -1,0 +1,21 @@
+
+emailext attachLog: true, body: '''<p>FAILED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\':</p>
+        <p>Check console output at &QUOT;<a href=\'${env.BUILD_URL}\'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>''', subject: 'FAILED: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\'', to: 'dilip.kolasani@gmail.com'
+
+
+$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!
+
+
+$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+Check console output at $BUILD_URL to view the results.
+
+
+Sending email to: dilip.kolasani@gmail.com
+DEBUG: getProvider() returning javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: need username and password for authentication
+DEBUG SMTP: protocolConnect returning false, host=stmp.gmail.com, user=PERSONALPC$, password=<null>
+DEBUG SMTP: useEhlo true, useAuth true
+DEBUG SMTP: trying to connect to host "stmp.gmail.com", port 465, isSSL false
+MailConnectException message: Couldn't connect to host, port: stmp.gmail.com, 465; timeout 60000
+Next UnknownHostException message: stmp.gmail.com
