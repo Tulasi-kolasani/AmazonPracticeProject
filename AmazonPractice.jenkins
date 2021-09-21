@@ -50,7 +50,7 @@ pipeline{
 //     {
 
        // bat "del report.zip"
-       //  zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'/target'
+         zip zipFile: 'report.zip', archive:false, dir:System.getProperty("user.dir")+'\target\cucumber-reports\advancedreports\cucumber-html-reports\overview-features.html'
 
 //        archiveArtifacts 'target/report.zip'
 
@@ -66,11 +66,13 @@ post
 
    always
    {
-       emailext attachLog: false, body:'$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:'+'\n'+
-       'Check console output at $BUILD_URL to view the results.', 
+       emailext( attachLog: false, 
+       attachmentsPattern:'report.zip'
+       body:'''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:\r\n
+       Check console output at $BUILD_URL to view the results.''', 
        replyTo: 'dilip.kolasani@gmail.com',
        subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-       to: 'dilip.kolasani@gmail.com'
+       to: 'dilip.kolasani@gmail.com')
    }
 
 }
