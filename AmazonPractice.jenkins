@@ -43,19 +43,19 @@ pipeline{
      } 
     
     }
-   stage('Archive')
-   {
+//   stage('Archive')
+//   {
 
-     steps
-     {
+//     steps
+//     {
 
        // bat "del report.zip"
-         zip zipFile: 'report.zip', archive:false, dir:'/target/cucumber-reports/advancedreports/cucumber-html-reports/overview-features.html'
+//         zip zipFile: 'report.zip', archive:false, dir:'/target/cucumber-reports/advancedreports/cucumber-html-reports/overview-features.html'
 
        // archiveArtifacts 'target/report.zip'
 
-     }
-   }
+ //    }
+//   }
 
  
   }
@@ -66,7 +66,6 @@ post
    always
    {
        emailext( attachLog: false, 
-       attachmentsPattern:'report.zip',
        body:'''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:\r\n
        Check console output at $BUILD_URL to view the results.''', 
        replyTo: 'dilip.kolasani@gmail.com',
