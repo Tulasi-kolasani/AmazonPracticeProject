@@ -26,6 +26,14 @@ public class AmazonHomePage {
 
     @FindBy(how= How.ID, using="nav-cart-count") private WebElement cartCountText;
 
+    @FindBy(how= How.ID, using="icp-nav-flyout") private WebElement languageDropdown;
+
+    @FindBy(how= How.ID, using="icp-btn-save-announce") private WebElement languagePageSaveButton;
+
+    @FindBy(how= How.XPATH, using="//input[@value='en_US']") private WebElement englishRadio;
+
+    @FindBy(how= How.XPATH, using="//input[@value='es_US']") private WebElement spanishRadio;
+
     public AmazonHomePage(WebDriver driver)
     {
         this.driver = driver;
@@ -73,6 +81,20 @@ public class AmazonHomePage {
 
     public WebElement getCartCountText() {
         return cartCountText;
+    }
+
+    public WebElement getLanguageDropdown() { return languageDropdown; }
+
+    public WebElement getLanguagePageSaveButton() {
+        return languagePageSaveButton;
+    }
+
+    public WebElement getEnglishRadio() {
+        return englishRadio;
+    }
+
+    public WebElement getSpanishRadio() {
+        return spanishRadio;
     }
 
 }
