@@ -11,6 +11,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -120,6 +121,30 @@ public class AmazonHomePageStepDefinition extends DriverFactory {
         homePage.getSearchSubmitButton().click();
 
     }
+
+    @When("User clicks on language dropdown")
+    public void clickOnLanguageDropdown() {
+        homePage.getLanguageDropdown().click();
+        ElementFactory.waitTillElementIsVisible(ElementFactory.typeCastToBy(homePage.getLanguagePageSaveButton()));
+        Assert.assertTrue("User is not in Language Settings page",driver.getTitle().equalsIgnoreCase("Change Language & Currency Settings"));
+
+    }
+
+    @Then("Validate that language selection is working correctly in language settings page")
+    public void languageSelectionValidation() {
+       /* Validate that by default English is selected*/
+        Assert.assertTrue("English option is not selected",homePage.getEnglishRadio().isSelected());
+
+        /* Select Spanish option and validate that radio button is selected */
+
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", homePage.getSpanishRadio());
+
+        Assert.assertTrue("Spanish option is not selected",homePage.getSpanishRadio().isSelected());
+
+
+    }
+
 
 
 }
